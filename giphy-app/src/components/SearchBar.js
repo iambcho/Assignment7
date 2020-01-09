@@ -18,6 +18,10 @@ export default class SearchBar extends Component {
       axios.get("http://api.giphy.com/v1/gifs/search?q="+(document.getElementById("inputSearch").value)+"&api_key=tgqggOWqq0zq6uSC0AwgK5fsUMjchVwr")
         .then((response) => {
           console.log("URL of first result in array:", response.data["data"][0]["url"]);
+          for(let i = 0; i < response.data.length; i++){
+            this.state.gifs.push(response.data["data"][i]["url"]);
+          }
+          console.log(this.state.gifs);
         })
         .then((error) => {
           console.log(error);
