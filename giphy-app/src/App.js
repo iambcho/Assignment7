@@ -4,6 +4,10 @@ import axios from 'axios';
 
 import './App.css';
 
+import SearchBar from './components/SearchBar';
+import GifCard from './components/GifCard';
+
+
 // class SearchBar extends Component {
 //     constructor(props) {
 // 	    super(props);
@@ -48,41 +52,13 @@ import './App.css';
 //     }
 // }
 
-class SearchBar extends Component {
-    constructor(props) {
-	    super(props);
-
-      this.state = {
-        data: this.props.data
-      }
-	
-	   
-    }
-
-    render() {
-
-      return (
-        
-        <div>
-          <h1>Test</h1>
-        </div>
-        );
-		
-    }
-}
-
-SearchBar.propTypes = {
-    data: PropTypes.array
-};
-
-SearchBar.defaultProps = {
-    data: []
-}
 
 function App() {
     return ( 
 	    <div class="App-header">
-	      <SearchBar/>
+	      <SearchBar />
+
+        <GifCard />
 	     </div>
 	     );
 }
