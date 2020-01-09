@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 
-export default class GifCard extends Component {
+export default class SearchBar extends Component {
     constructor(props) {
 	    super(props);
 
@@ -22,11 +22,10 @@ export default class GifCard extends Component {
     }
 }
 
-GifCard.propTypes = {
+SearchBar.propTypes = {
     data: PropTypes.array
 };
 
-GifCard.defaultProps = {
+SearchBar.defaultProps = {
     data: []
 }
-
