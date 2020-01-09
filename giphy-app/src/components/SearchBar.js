@@ -7,18 +7,17 @@ export default class SearchBar extends Component {
 	    super(props);
 
       this.state = {
-        searchInput: this.props.data
-      }
-	
-	   
+        searchInput: this.props.searchInput,
+        gifs: this.props.gifs
+      }   
     }
     setSearchInput = (e) => {
       this.setState({searchInput: e.target.value});
     }
-    search() {
-      axios.get("http://api.giphy.com/v1/gifs/search?q=SEARCH+TERM+GOES+HERE&api_key=tgqggOWqq0zq6uSC0AwgK5fsUMjchVwr" + document.getElementById("inputSearch").value)
+    search = (e) => {
+      axios.get("http://api.giphy.com/v1/gifs/search?q="+(document.getElementById("inputSearch").value)+"&api_key=tgqggOWqq0zq6uSC0AwgK5fsUMjchVwr")
         .then((response) => {
-          console.log(response);
+          console.log("URL of first result in array:", response.data["data"][0]["url"]);
         })
         .then((error) => {
           console.log(error);
@@ -29,13 +28,18 @@ export default class SearchBar extends Component {
         return (
             <div>
                 <h1>Search GIPHY</h1>
-                <input id="inputSearch" value={this.state.searchInput} onChange={this.setSearchInput}></input>
-                <button onClick={this.handleSearchClick}>Search</button>
+                <input id="inputSearch" onChange={this.setSearchInput}></input>
+                <button onClick={this.search}>Search</button>
            </div>
           );
     }
 }
 
 SearchBar.propTypes = {
-    searchInput: PropTypes.string
+    searchInput: PropTypes.string,
+    gifs: PropTypes.array
 };
+
+SearchBar.defaultProps = {
+    gifs: []
+}
