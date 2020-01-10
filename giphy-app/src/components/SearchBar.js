@@ -36,6 +36,7 @@ export default class SearchBar extends Component {
     };
 
     setSearchInput = (e) => {
+
 	this.setState({searchInput: e.target.value});
     };
     //pg, pg-13, g, r
@@ -95,6 +96,7 @@ export default class SearchBar extends Component {
 		<div> {parsed} </div>
 		</div>
 		);
+
     }
 }
 
