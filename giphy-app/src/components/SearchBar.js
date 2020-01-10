@@ -15,6 +15,7 @@ export default class SearchBar extends Component {
     }
 
     setSearchInput = (e) => {
+
 	this.setState({searchInput: e.target.value});
     };
 
@@ -51,6 +52,7 @@ export default class SearchBar extends Component {
 		<div> {parsed} </div>
 		</div>
 		);
+
     }
 }
 
