@@ -14,14 +14,26 @@ export default class SearchBar extends Component {
     setSearchInput = (e) => {
       this.setState({searchInput: e.target.value});
     }
+
+ 
+
     search = (e) => {
       axios.get("http://api.giphy.com/v1/gifs/search?q="+(document.getElementById("inputSearch").value)+"&api_key=tgqggOWqq0zq6uSC0AwgK5fsUMjchVwr")
         .then((response) => {
-          console.log("URL of first result in array:", response.data["data"][0]["url"]);
-          for(let i = 0; i < response.data.length; i++){
-            this.state.gifs.push(response.data["data"][i]["url"]);
+          // console.log("URL of first result in array:", response.data["data"][0]["url"]);
+          
+          console.log(response);
+          console.log(response.data.data[0].images.fixed_width.url);
+          
+
+          let table = []
+
+          for(let i = 0; i < response.data.data.length; i++){
+            table.push(response.data.data[i].images.fixed_width.url);
           }
-          console.log(this.state.gifs);
+          // console.log(table);
+
+          this.setState({gifs: table});
         })
         .then((error) => {
           console.log(error);
@@ -34,6 +46,8 @@ export default class SearchBar extends Component {
                 <h1>Search GIPHY</h1>
                 <input id="inputSearch" onChange={this.setSearchInput}></input>
                 <button onClick={this.search}>Search</button>
+                <br/>
+                {this.state.gifs.map(url => <div key={url}><img src={url}/></div>)} 
            </div>
           );
     }
