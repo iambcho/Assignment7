@@ -15,11 +15,20 @@ export default class SearchBar extends Component {
 	    hideG: false,
 	    hidePG: false,
 	    hidePG13: false,
-	    hideR: false
+		hideR: false,
+		order: "default"
 	}   
     }
 
-    hideYChangeHandler = (e) => {
+	oldest = (e) => {
+		this.setState({order: "oldest"});
+	};
+
+	newest = (e) => {
+		this.setState({order: "newest"});
+	};
+
+	hideYChangeHandler = (e) => {
 	this.setState({hideY: !this.state.hideY});
     };
     hideGChangeHandler = (e) => {
@@ -64,7 +73,14 @@ export default class SearchBar extends Component {
 			console.log(error);
 		    });
 	 
-	}	
+	}
+
+	if(this.state.order === "oldest") {
+		this.state.gifs.sort((a, b) => (a.import_datetime > b.import_datetime) ? 1 : -1);
+	}
+	else if(this.state.order === "newest") {
+		this.state.gifs.sort((a, b) => (a.import_datetime < b.import_datetime) ? 1 : -1);
+	}
 
 	var parsed = this.state.gifs.map((element) => {
 		if(element.rating === "y" && this.state.hideY == true) {
@@ -91,8 +107,17 @@ export default class SearchBar extends Component {
 		PG<input type="checkbox" onClick={this.hidePGChangeHandler}/>
 		PG13<input type="checkbox" onClick={this.hidePG13ChangeHandler}/>
 		R<input type="checkbox" onClick={this.hideRChangeHandler}/> <br/>
+
+		<h2>Sort:</h2>
+		Oldest<input name="sort" type="radio" onClick={this.oldest}/>
+		Newest<input name="sort" type="radio" onClick={this.newest}/>
+		 <br/>
+		 <br/>
+
 		<input id="inputSearch" onChange={this.setSearchInput}></input>
 		<button onClick={this.search}>Search</button>
+		<br/>
+		<br/>
 		<div> {parsed} </div>
 		</div>
 		);
